@@ -1,0 +1,34 @@
+.pin_container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 236px);
+  grid-auto-rows: 10px;
+  column-gap: 16px;
+  justify-content: center;
+  background-color: white;
+}
+
+.card {
+  margin: 0 0 14px 0;
+  width: 236px;
+  padding: 0;
+  border-radius: 16px;
+  /* backgroundColor: red; */
+}
+
+.img {
+  object-fit: cover; 
+  width: 100%; 
+  height: 100%; 
+  border-radius: 16px
+}
+
+/* @media screen and (max-width: 768px) {
+  .pin_container {
+    grid-template-columns: repeat(auto-fill, 156px);
+    column-gap: 8px;
+    margin-top: 8vh;
+  }
+} */
