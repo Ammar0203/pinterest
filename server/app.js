@@ -14,7 +14,10 @@ require('./strategies/local-strategy')
 
 var app = express();
 
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173', // React app URL
+  credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,7 +35,10 @@ app.use(passport.session())
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/auth', require('./routes/auth'))
-app.use('/api/image', require('./routes/image'))
+app.use('/api/pin', require('./routes/pin'))
+app.use('/api/like', require('./routes/like'))
+app.use('/api/comment', require('./routes/comment'))
+app.use('/api/user', require('./routes/user'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

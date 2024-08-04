@@ -1,32 +1,39 @@
-// import passport from "passport";
-// import { Strategy } from "passport-local";
-// import User from "../models/user.js";
-const passport = require('passport')
-const Strategy = require('passport-local')
-const User = require('../models/user')
+const passport = require("passport");
+const Strategy = require("passport-local");
+const User = require("../models/user");
 
-passport.serializeUser((user, done) => {console.log('ser');done(null, user.email)})
+passport.serializeUser((user, done) => done(null, user._id));
 
-passport.deserializeUser(async (email, done) => {
-  console.log('deser')
+passport.deserializeUser(async (_id, done) => {
   try {
-    const user = await User.findOne({email: email})
-    if(!user) throw new Error('User not found')
-    done(null, user)
+    const user = await User.findById(_id).select("-password");
+    if (!user)
+      throw {
+        message: "The email you entered does not belong to any account.",
+      };
+    done(null, user);
+  } catch (err) {
+    done(err, null);
   }
-  catch(err) {
-    done(err, null)
-  }
-})
+});
 
-passport.use(new Strategy({usernameField: 'email'}, async (email, password, done) => {
-  try {
-    const user = await User.findOne({email: email})
-    if(!user) throw new Error('User not found')
-    if(!await user.comparePassword(password)) throw new Error('Bad Credentials')
-    done(null, user)
-  }
-  catch(err) {
-    done(err, null)
-  }
-}))
+passport.use(
+  new Strategy({ usernameField: "email" }, async (email, password, done) => {
+    try {
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        console.log(1)
+        return done(null, false, { email: {message: "Incorrect email."} });
+      }
+      if (!(await user.comparePassword(password))) {
+        console.log(2)
+        return done(null, false, { password: {message: "Incorrect password."} });
+      }
+      console.log(3)
+      return done(null, user);
+    }
+    catch (err) {
+      done(err, false)
+    }
+  })
+);

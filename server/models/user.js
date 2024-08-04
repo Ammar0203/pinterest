@@ -6,7 +6,8 @@ const userSchema = new Schema({
     type: String,
     required: true,
     trim: true,
-    maxLength: 20,
+    maxLength: 32,
+    minLength: 1,
   },
   email: {
     type: String,
@@ -14,12 +15,20 @@ const userSchema = new Schema({
     trim: true,
     unique: true,
     lowercase: true,
+    minLength: 3,
   },
   password: {
     type: String,
     required: true,
     trim: true,
   },
+  avatar: {
+    type: String,
+    trim: true,
+    default: null,
+  },
+}, {
+  timestamps: true,
 });
 
 userSchema.pre("save", function (next) {
@@ -34,8 +43,14 @@ userSchema.pre("save", function (next) {
 });
 
 userSchema.methods.comparePassword = async function(candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password)
+  return await bcrypt.compare(candidatePassword, this.password)
 };
+
+userSchema.methods.toJSON = function() {
+  var obj = this.toObject();
+  delete obj.password;
+  return obj;
+}
 
 const User = model("User", userSchema);
 

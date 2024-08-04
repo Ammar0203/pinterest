@@ -1,3 +1,4 @@
 /pinterest/node_modules
 /server/node_modules
-/server/public/images/*
+/server/public/pins/*
+/server/public/avatars/*
