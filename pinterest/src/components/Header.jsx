@@ -6,6 +6,7 @@ import avatar from '../../public/avatar.png'
 import { IonIcon } from "@ionic/react";
 import { chevronDownOutline } from "ionicons/icons";
 import './styles/Header.css'
+import URL from "../url";
 
 function Header() {
   const { isAuthenticated, user, handleLogin, handleLogout } =
@@ -56,7 +57,7 @@ function Header() {
                 <Link to={`/profile/${user._id}`} style={{display: 'flex', gap: 16, fontSize: '1rem', textDecoration: 'none', }}>
                   {user?.name}
                   <div style={{display: "flex", justifyContent: "center", alignItems: "center", width: 40, height: 40, borderRadius: '50%'}} className="greybackground">
-                    <img src={user?.avatar ? `http://localhost:55/avatars/${user?.avatar}` : avatar} style={{borderRadius: "50%", width: 24, height: 24, zIndex: 1, objectFit: 'cover'}} />
+                    <img src={user?.avatar ? `${URL}/avatars/${user?.avatar}` : avatar} style={{borderRadius: "50%", width: 24, height: 24, zIndex: 1, objectFit: 'cover'}} />
                   </div>
                 </Link>
               </li>

@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Cards from "../components/Cards";
 import { IonIcon } from "@ionic/react";
 import { arrowBackOutline } from "ionicons/icons";
+import URL from "../url";
 
 export default function Profile() {
   const { _id } = useParams();
@@ -139,7 +140,7 @@ export default function Profile() {
             <div style={{width: '100%', display: 'flex', justifyContent: 'center', gap: 48}}>
               <form className='form' onSubmit={onSubmit}>
                 <div className='input-container'>
-                  <img onClick={e => fileUpload.current.click()} src={image ? URL.createObjectURL(image) : (profile?.avatar ? `http://localhost:55/avatars/${profile?.avatar}` : avatar)} style={{borderRadius: "50%", width: 120, height: 120, objectFit: 'cover', alignSelf: 'center'}} />
+                  <img onClick={e => fileUpload.current.click()} src={image ? URL.createObjectURL(image) : (profile?.avatar ? `${URL}/avatars/${profile?.avatar}` : avatar)} style={{borderRadius: "50%", width: 120, height: 120, objectFit: 'cover', alignSelf: 'center'}} />
                   <input ref={fileUpload} type='file' onChange={onImageChange} style={{display: 'none'}} />
                 </div>
                 <div className='input-container'>
@@ -176,7 +177,7 @@ export default function Profile() {
               <div onClick={e => setEdit(true)} className="a grey" style={{width: 'fit-content', margin: '0 16px', cursor: 'pointer'}}>Edit Profile</div>
             } 
             <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 16, margin: '20px'}}>
-              <img src={profile?.avatar ? `http://localhost:55/avatars/${profile?.avatar}` : avatar} style={{borderRadius: "50%", width: 120, height: 120, objectFit: 'cover'}} />
+              <img src={profile?.avatar ? `${URL}/avatars/${profile?.avatar}` : avatar} style={{borderRadius: "50%", width: 120, height: 120, objectFit: 'cover'}} />
               <div style={{ fontSize: "36px" }}>{profile?.name}</div>
               <div style={{width: '100%', height: 1, backgroundColor: '#e9e9e9'}} />
             </div>

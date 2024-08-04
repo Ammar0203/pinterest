@@ -13,6 +13,7 @@ import api from "../api";
 import "./styles/Pin.css";
 import avatar from "../../public/avatar.png";
 import { AuthContext } from "../contexts/AuthContext";
+import URL from "../url";
 
 export default function Pin() {
   const {handleLike, handleAddComment, user, isAuthenticated} = useContext(AuthContext)
@@ -115,7 +116,7 @@ export default function Pin() {
         <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center", width: "fit-content", borderRadius: 32, boxShadow: "rgb(211 211 211) 0px 0px 20px 0px"}}>
           {/* Pin */}
           <div style={{width: 508, borderRadius: 32, padding: 20}}>
-            <img src={"http://localhost:55/pins/" + name} style={{width: "100%", objectFit: "contain", display: "flex", borderRadius: 16}}/>
+            <img src={`${URL}/pins/${name}`} style={{width: "100%", objectFit: "contain", display: "flex", borderRadius: 16}}/>
           </div>
           {/* Title and comments container */}
           {edit ? 
@@ -190,7 +191,7 @@ export default function Pin() {
                     <img
                       src={
                         pin?.user?.avatar
-                          ? `http://localhost:55/avatars/${pin?.user?.avatar}`
+                          ? `${URL}/avatars/${pin?.user?.avatar}`
                           : avatar
                       }
                       style={{ borderRadius: "50%", width: 48, height: 48, objectFit: 'cover' }}
@@ -215,7 +216,7 @@ export default function Pin() {
                         <img
                           src={
                             comment?.user?.avatar
-                              ? `http://localhost:55/avatars/${comment?.user?.avatar}`
+                              ? `${URL}/avatars/${comment?.user?.avatar}`
                               : avatar
                           }
                           style={{
