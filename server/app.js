@@ -14,6 +14,14 @@ require('./strategies/local-strategy')
 
 var app = express();
 
+var fs = require('fs');
+if (!fs.existsSync('./public/pins')){
+    fs.mkdirSync('./public/pins', { recursive: true });
+}
+if (!fs.existsSync('./public/avatars')){
+    fs.mkdirSync('./public/avatars', { recursive: true });
+}
+
 app.use(cors({
   origin: 'http://localhost:5173', // React app URL
   credentials: true
