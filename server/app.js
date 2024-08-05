@@ -23,7 +23,7 @@ if (!fs.existsSync('./public/avatars')){
 }
 
 app.use(cors({
-  origin: 'http://localhost:5173', // React app URL
+  origin: process.env.CLIENT_URL, // React app URL
   credentials: true
 }));
 app.use(logger('dev'));
