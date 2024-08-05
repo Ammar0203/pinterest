@@ -3,13 +3,15 @@ const { authenticated } = require('../middlewares/auth');
 const User = require('../models/user')
 const multer = require('multer');
 const fs = require('fs')
+const path = require('path')
 
 const router = express.Router()
 
 const storage = multer.diskStorage({
   destination: 'public/avatars/',
   filename: function (req, file, cb) {
-      cb(null, Date.now() + Math.random().toFixed(5).slice(2))
+    const ext = path.extname(file.originalname).toLowerCase()
+    cb(null, `${Date.now() + Math.random().toFixed(5).slice(2)}.${ext}`)
   }
 });
 

@@ -13,11 +13,21 @@ function Form({handleLogin}) {
   const [error, setError] = useState(null)
 
   async function onSubmit(e) {
+
+    var validateEmail = function(email) {
+      var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return re.test(email)
+    };
+    
     e.preventDefault()
     if(error) return
     try {
       if (password !== confirmPassword) {
         return setError({ passwords: {message: `Passwords do not match.`}})
+      }
+      console.log(validateEmail(email))
+      if (!validateEmail(email)) {
+        return setError({ email: {message: 'Invalid email'}})
       }
       await api.post('/api/auth/signup', {name, email, password})
       await handleLogin(email, password)
@@ -55,7 +65,7 @@ function Form({handleLogin}) {
         </div>
         <button type="submit" disabled={error} className='red-button'>Sign up</button>
       </form>
-      <Link className='redirect' to='/login'>
+      <Link className='redirect' to='/login' style={{marginBottom: 50}}>
         Have an account? Log in
       </Link>
     </>

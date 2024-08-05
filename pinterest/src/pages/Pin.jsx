@@ -13,7 +13,7 @@ import api from "../api";
 import "./styles/Pin.css";
 import avatar from "../../public/avatar.png";
 import { AuthContext } from "../contexts/AuthContext";
-import URL from "../url";
+import URLs from "../url";
 
 export default function Pin() {
   const {handleLike, handleAddComment, user, isAuthenticated} = useContext(AuthContext)
@@ -116,7 +116,7 @@ export default function Pin() {
         <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center", width: "fit-content", borderRadius: 32, boxShadow: "rgb(211 211 211) 0px 0px 20px 0px"}}>
           {/* Pin */}
           <div style={{width: 508, borderRadius: 32, padding: 20}}>
-            <img src={`${URL}/pins/${name}`} style={{width: "100%", objectFit: "contain", display: "flex", borderRadius: 16}}/>
+            <img src={`${URLs}/pins/${name}`} style={{width: "100%", objectFit: "contain", display: "flex", borderRadius: 16}}/>
           </div>
           {/* Title and comments container */}
           {edit ? 
@@ -152,8 +152,8 @@ export default function Pin() {
                   {/* title */}
                   {user?._id === pin?.user?._id && 
                     <div style={{display: 'flex', height: 'min-content', gap: 16, justifyContent: 'flex-end'}}>
-                      <div className="a grey" onClick={e => setEdit(true)} >Edit</div>
-                      <div className="a red"
+                      <div className="a grey" onClick={e => setEdit(true)} style={{cursor: 'pointer'}} >Edit</div>
+                      <div className="a red" style={{cursor: 'pointer'}}
                         onClick={async (e) => {
                           try {
                             const response = await api.post('/api/pin/delete', {pin_id: pin?._id})
@@ -191,7 +191,7 @@ export default function Pin() {
                     <img
                       src={
                         pin?.user?.avatar
-                          ? `${URL}/avatars/${pin?.user?.avatar}`
+                          ? `${URLs}/avatars/${pin?.user?.avatar}`
                           : avatar
                       }
                       style={{ borderRadius: "50%", width: 48, height: 48, objectFit: 'cover' }}
@@ -216,7 +216,7 @@ export default function Pin() {
                         <img
                           src={
                             comment?.user?.avatar
-                              ? `${URL}/avatars/${comment?.user?.avatar}`
+                              ? `${URLs}/avatars/${comment?.user?.avatar}`
                               : avatar
                           }
                           style={{

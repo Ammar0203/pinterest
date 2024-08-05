@@ -6,13 +6,15 @@ const fs = require('fs')
 const { authenticated } = require('../middlewares/auth');
 const Like = require("../models/like");
 const Comment = require('../models/comment')
+const path = require('path')
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: 'public/pins/',
   filename: function (req, file, cb) {
-      cb(null, Date.now() + Math.random().toFixed(5).slice(2))
+      const ext = path.extname(file.originalname).toLowerCase()
+      cb(null, `${Date.now() + Math.random().toFixed(5).slice(2)}.${ext}`)
   }
 });
 

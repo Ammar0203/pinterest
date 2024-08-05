@@ -24,22 +24,28 @@ export default function Cards({query}) {
   );
 
   return (
-    <div className="Home-pin-container">
-      {pins.length > 0 ?
-        pins.map((pin, index) => {
-          if (pins.length === index + 1) {
-            return (
-              <Card innerRef={lastPinElementRef} key={pin.name} pin={pin} />
-            );
-          } else {
-            return <Card key={pin._id} pin={pin} />;
-          }
-        })
-        :
-        <div style={{fontSize: '2rem', fontWeight: 600, alignSelf: 'center', width: '90vw', textAlign: 'center', marginTop: 36, opacity: 0.7}}>
-          no pins yet...
+    pins.length > 0 ?
+      <>
+        <div className="Home-pin-container">
+          {pins.map((pin, index) => {
+            if (pins.length === index + 1) {
+              return (
+                <Card innerRef={lastPinElementRef} key={pin.name} pin={pin} />
+              );
+            } else {
+              return <Card key={pin._id} pin={pin} />;
+            }
+          })}
         </div>
-      }
-    </div>
+        {!hasMore &&
+          <div style={{fontSize: '2rem', fontWeight: 600, width: '100%', textAlign: 'center', marginTop: 36, opacity: 0.7}}>
+            that's it...
+          </div>
+        }
+      </>
+      :
+      <div style={{fontSize: '2rem', fontWeight: 600, width: '100%', textAlign: 'center', marginTop: 36, opacity: 0.7}}>
+        no pins yet...
+      </div>
   );
 }

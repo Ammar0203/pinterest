@@ -1,5 +1,6 @@
 li.dropdown {
   /* display: inline-block; */
+  height: min-content
 }
 
 .dropdown-content {
@@ -25,9 +26,9 @@ li.dropdown {
 
 .dropdown-content div:hover {background-color: #f1f1f1;}
 
-.dropdown:hover .dropdown-content {
+/* .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 
 li {
   display: flex;

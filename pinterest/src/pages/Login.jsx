@@ -10,9 +10,18 @@ function Form({handleLogin}) {
   const [error, setError] = useState(null)
 
   async function onSubmit(e) {
+
+    var validateEmail = function(email) {
+      var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return re.test(email)
+    };
     e.preventDefault()
     if(error) return
     try {
+      console.log(!validateEmail(email))
+      if (!validateEmail(email)) {
+        return setError({ email: {message: 'Invalid email'}})
+      }
       await handleLogin(email, password)
     } catch (error) {
       setError(error?.response?.data)
@@ -30,7 +39,7 @@ function Form({handleLogin}) {
         <div className='input-container'>
           <label htmlFor='email'>Email</label>
           <input value={email} onChange={(e) => handleInputChange(e, setEmail)} id="email" className='input' placeholder='Email' type='email' required autoComplete='false' />
-          {error?.email && <div className='error'>The email you entered does not belong to any account.</div>}
+          {error?.email && <div className='error'>{error.email.message}</div>}
         </div>
         <div className='input-container'>
           <label htmlFor='password'>Password</label>
@@ -39,7 +48,7 @@ function Form({handleLogin}) {
         </div>
         <button type="submit" disabled={error} className='red-button'>log in</button>
       </form>
-      <Link className='redirect' to='/signup'>
+      <Link className='redirect' to='/signup' style={{marginBottom: 50}}>
         Not on Pinterest yet? Sign up
       </Link>
       

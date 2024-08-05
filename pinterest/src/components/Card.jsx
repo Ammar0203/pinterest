@@ -5,7 +5,7 @@ import api from "../api";
 import { IonIcon } from "@ionic/react";
 import { chatbubbleOutline, heart, heartOutline } from "ionicons/icons";
 import './styles/Cards.css'
-import URL from "../url";
+import URLs from "../url";
 
 export default function Card({pin, innerRef}) {
   const {isAuthenticated, handleLike} = useContext(AuthContext)
@@ -70,7 +70,7 @@ export default function Card({pin, innerRef}) {
       </div>
       <img
         ref={innerRef}
-        src={`${URL}/pins/${name}`}
+        src={`${URLs}/pins/${name}`}
         className="Home-img"
       />
     </div>

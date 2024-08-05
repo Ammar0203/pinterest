@@ -1,2 +1,2 @@
-const URL = 'http://localhost:55'
-export default URL 
+const URLs = 'http://localhost:55'
+export default URLs 

@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<AppRoute can={!isAuthenticated} redirectTo='/' ><Login /></AppRoute>} />
         <Route path='/signup' element={<AppRoute can={!isAuthenticated} redirectTo='/' ><Signup/></AppRoute>} />
-        <Route path='/create' element={<Create />} />
+        <Route path='/create' element={<AppRoute can={isAuthenticated} redirectTo='/login' ><Create /></AppRoute>} />
         <Route path='/pin/:name' element={<Pin />} />
         <Route path='/profile/:_id' element={<Profile />} />
       </Routes>
